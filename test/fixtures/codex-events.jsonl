@@ -1,0 +1,23 @@
+# scenario: success
+{"type":"thread.started","thread_id":"019a1c2d-3e4f-7a8b-9c0d-1e2f3a4b5c6d"}
+{"type":"turn.started"}
+{"type":"item.started","item":{"id":"item_0","type":"reasoning","text":""}}
+{"type":"item.completed","item":{"id":"item_0","type":"reasoning","text":"**Inspecting the repository**\n\nI need to look at the existing helpers before adding one."}}
+{"type":"item.started","item":{"id":"item_1","type":"command_execution","command":"/bin/bash -lc 'ls src'","aggregated_output":"","status":"in_progress"}}
+{"type":"item.completed","item":{"id":"item_1","type":"command_execution","command":"/bin/bash -lc 'ls src'","aggregated_output":"index.ts\nsum.ts\n","exit_code":0,"status":"completed"}}
+{"type":"item.started","item":{"id":"item_2","type":"agent_message","text":""}}
+{"type":"item.completed","item":{"id":"item_2","type":"agent_message","text":"Working on it."}}
+{"type":"item.started","item":{"id":"item_3","type":"file_change","changes":[{"path":"/work/repo/src/sum.ts","kind":"update"}],"status":"in_progress"}}
+{"type":"item.completed","item":{"id":"item_3","type":"file_change","changes":[{"path":"/work/repo/src/sum.ts","kind":"update"}],"status":"completed"}}
+{"type":"item.completed","item":{"id":"item_4","type":"agent_message","text":"Added a `sum` helper in src/sum.ts and exported it from index.ts."}}
+{"type":"turn.completed","usage":{"input_tokens":5120,"cached_input_tokens":4096,"output_tokens":310}}
+# scenario: rate-limited
+{"type":"thread.started","thread_id":"019a1c2d-aaaa-7a8b-9c0d-1e2f3a4b5c6d"}
+{"type":"turn.started"}
+{"type":"error","message":"You've hit your usage limit. Try again in 2 hours 5 minutes."}
+{"type":"turn.failed","error":{"message":"usage_limit_exceeded"}}
+# scenario: auth-failed
+{"type":"thread.started","thread_id":"019a1c2d-bbbb-7a8b-9c0d-1e2f3a4b5c6d"}
+{"type":"turn.started"}
+{"type":"error","message":"401 Unauthorized: Missing bearer or basic authentication in header"}
+{"type":"turn.failed","error":{"message":"401 Unauthorized"}}
