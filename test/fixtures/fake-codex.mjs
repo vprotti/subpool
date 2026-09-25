@@ -35,8 +35,11 @@ async function readStdin() {
 
 function finish(code) {
   const sleep = Number(env.FAKE_SLEEP_MS ?? 0);
-  if (sleep > 0) setTimeout(() => process.exit(code), sleep);
-  else process.exit(code);
+  const done = () => {
+    process.exitCode = code;
+  };
+  if (sleep > 0) setTimeout(done, sleep);
+  else done();
 }
 
 const exitCode = Number(env.FAKE_EXIT ?? 0);
